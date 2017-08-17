@@ -8,7 +8,8 @@ compinit
 # load prompt
 autoload -Uz promptinit
 promptinit
+# set theme
+prompt suse
 # aliases
 alias ls='ls --color=auto'
-alias config='/usr/bin/git --git-dir=/home/davos/.dotfiles/ --work-tree='
 alias config='/usr/bin/git --git-dir=/home/davos/.dotfiles/ --work-tree=/home/davos'
