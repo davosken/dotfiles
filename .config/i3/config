@@ -57,12 +57,12 @@ for_window [instance="dropdown"] move position center
 for_window [instance="dropdown"] move scratchpad
 exec --no-startup-id $term -name dropdown -e tmux
 
-##--SCRATCHPAD2:MATH--##
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move position center
-for_window [instance="math"] move scratchpad
-exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name math -e R -q
+##--SCRATCHPAD2:ARITHMETIC--##
+for_window [instance="arithmetic"] floating enable
+for_window [instance="arithmetic"] resize set 800 300
+for_window [instance="arithmetic"] move position center
+for_window [instance="arithmetic"] move scratchpad
+exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name arithmetic -e R -q
 
 
 ###---BASIC BINDINGS---###
@@ -91,81 +91,129 @@ bindsym $mod+Shift+w		exec --no-startup-id $browser
 bindsym $mod+e			exec $term -e mutt
 #bindsym $mod+Shift+e
 
+bindsym $mod+r			exec $term -e ranger
+bindsym $mod+Shift+r		restart
+
+bindsym $mod+t			split toggle
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+
+#bindsym $mod+y			exec $term -e calcurse
+bindsym $mod+Shift+y		resize shrink width 10 px or 10 ppt
+
+bindsym $mod+u			[instance="dropdown"] scratchpad show; move position center
+bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
+
+bindsym $mod+i			exec $term -e htop
+bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
+
+#bindsym $mod+o			exec --no-startup-id $beg
+bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
+
+bindsym $mod+p			exec $pause
+#bindsym $mod+Shift+p		
+
+bindsym $mod+a			[instance="arithmetic"] scratchpad show; move position center
+bindsym $mod+Shift+a		exec $term -e alsamixer
+
+bindsym $mod+s			gaps inner current plus 5
+bindsym $mod+Shift+s		gaps inner current minus 5
+
 bindsym $mod+d			exec rofi -show run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
-# kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+f			fullscreen toggle
+#bindsym $mod+Shift+f
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+g			workspace prev
+bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h			focus left
+bindsym $mod+Shift+h		move left 30
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+j			focus down
+bindsym $mod+Shift+j		move down 30
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+k			focus up
+bindsym $mod+Shift+k		move up 30
 
-# split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+l			focus right
+bindsym $mod+Shift+l		move right 30
 
-# split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+z			gaps outer current plus 5
+bindsym $mod+Shift+z		gaps outer current minus 5
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+Shift+x		exec sudo shutdown -h now
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-#bindsym $mod+e layout toggle split
+#bindsym $mod+c			exec $term -e weechat
+#bindsym $mod+Shift+c
 
-# focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+v			exec urxvt -e ncmpcpp -s visualizer
+#bindsym $mod+Shift+v
 
-# focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+b			exec $prev
+bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
+
+bindsym $mod+n			exec $next
+#bindsym $mod+Shift+n		exec $term -e newsbeuter
+
+bindsym $mod+m 			exec $music
+bindsym $mod+Shift+m 		exec $mute
+
+
+###---WORKSPACE BINDINGS---###
+bindsym $mod+Home		workspace $ws1
+bindsym $mod+Shift+Home		move container to workspace $ws1
+bindsym $mod+End		workspace $ws10
+bindsym $mod+Shift+End		move container to workspace $ws10
+bindsym $mod+Prior		workspace prev
+bindsym $mod+Shift+Prior	move container to workspace prev
+bindsym $mod+Next		workspace next
+bindsym $mod+Shift+Next		move container to workspace next
+bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+XF86Back		workspace prev
+#bindsym $mod+Shift+XF86Back	
+bindsym $mod+XF86Forward	workspace next
+#bindsym $mod+Shift+XF86Forward	
+bindsym $mod+semicolon		workspace next
+bindsym $mod+apostrophe		split horizontal ;; exec $term
+bindsym $mod+slash		split vertical ;; exec $term
+bindsym $mod+Shift+slash	kill
+bindsym $mod+backslash 		workspace back_and_forth
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
+bindsym $mod+1		workspace $ws1
+bindsym $mod+2		workspace $ws2
+bindsym $mod+3		workspace $ws3
+bindsym $mod+4		workspace $ws4
+bindsym $mod+5		workspace $ws5
+bindsym $mod+6		workspace $ws6
+bindsym $mod+7		workspace $ws7
+bindsym $mod+8		workspace $ws8
+bindsym $mod+9		workspace $ws9
+bindsym $mod+0		workspace $ws10
+ 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 bindsym $mod+Shift+c	reload
-bindsym $mod+Shift+r	restart
-
-bindsym $mod+x		exec --no-startup-id ~/.config/i3/lock.sh
