@@ -1,0 +1,3 @@
+# .zprofile
+
+exec startx

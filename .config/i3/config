@@ -1,43 +1,100 @@
 # vim: filetype=i3
 
-###---Basic Definitions---###
+###---BASIC DEFINITIONS---###
+set $mod Mod4
+set $term urxvt
+set $browser firefox
+
+
+###---SETTINGS---###
 font pango:Dejavu Sans Mono 12
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
 gaps inner 15
 gaps outer 15
-set $mod Mod4
-set $term urxvt
-set $browser firefox
 
-###---Startup---###
-# set resolution
-exec --no-startup-id xrandr -s 2560x1440 -r 60
-# set sync
-exec --no-startup-id syncthing -no-browser
-# set 
-exec --no-startup-id compton
-# set bar
+
+###---STARTUP---###
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-# set wallpaper
+exec --no-startup-id xrandr -s 2560x1440 -r 60
+exec --no-startup-id mpd
+exec --no-startup-id unclutter
+exec --no-startup-id syncthing -no-browser
+exec --no-startup-id compton
 exec --no-startup-id feh --bg-scale ~/.config/wall.png
 
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+###---AUDIO AND MUSIC DEFINITIONS---###
 
-# start a terminal
-bindsym $mod+Return exec $term
+##--FOR MPC--##
+set $music urxvt -e ncmpcpp
+set $pause --no-startup-id mpc toggle
+set $trupause --no-startup-id mpc pause
+set $next --no-startup-id mpc next
+set $next --no-startup-id mpc prev
+set $lilfor --no-startup-id mpc seek +10
+set $bigfor --no-startup-id mpc seek +100
+set $lilbak --no-startup-id mpc seek -10
+set $bigbak --no-startup-id mpc seek -100
+set $beg --no-startup-id mpc seek 0%
+
+##--FOR ALSA--##
+set $inc --no-startup-id amixer sset Master 2%+
+set $biginc --no-startup-id amixer sset Master 5%+
+set $dec --no-startup-id amixer sset Master 2%-
+set $bigdec --no-startup-id amixer sset Master 5%-
+set $mute --no-startup-id amixer sset Master toggle
+set $truemute --no-startup-id amixer sset Master mute
+
+
+###---SCRATCHPAD WINDOWS---###
+
+##--SCRATCHPAD1:DROPDOWN--##
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move position center
+for_window [instance="dropdown"] move scratchpad
+exec --no-startup-id $term -name dropdown -e tmux
+
+##--SCRATCHPAD2:MATH--##
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 800 300
+for_window [instance="math"] move position center
+for_window [instance="math"] move scratchpad
+exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name math -e R -q
+
+
+###---BASIC BINDINGS---###
+bindsym $mod+Return		exec $term
+bindsym $mod+Shift+Return	exec $term -e tmux
+
+bindsym $mod+space		focus mode_toggle
+bindsym $mod+Shift+space	floating toggle
+
+bindsym $mod+Escape		workspace prev
+bindsym $mod+Shift+Escape	exec i3-msg exit
+
+bindsym $mod+BackSpace		exec $flash
+bindsym $mod+Shift+BackSpace	exec sudo reboot
+
+bindsym $mod+grave		exec $flash
+#bindsym $mod+asciitilde
+
+###---LETTER KEY BINDINGS---###
+bindsym $mod+q			kill
+#bindsym $mod+shift+q		kill
+
+#bindsym $mod+w
+bindsym $mod+Shift+w		exec --no-startup-id $browser
+
+bindsym $mod+e			exec $term -e mutt
+#bindsym $mod+Shift+e
+
+bindsym $mod+d			exec rofi -show run
+bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -75,13 +132,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+e layout toggle split
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -113,43 +164,7 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#        status_command i3status
-#}
+bindsym $mod+Shift+c	reload
+bindsym $mod+Shift+r	restart
 
 bindsym $mod+x		exec --no-startup-id ~/.config/i3/lock.sh
