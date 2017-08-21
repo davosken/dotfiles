@@ -17,6 +17,7 @@ gaps outer 15
 ###---STARTUP---###
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id xrandr -s 2560x1440 -r 60
+exec --no-startup-id nm-applet
 exec --no-startup-id mpd
 exec --no-startup-id unclutter
 exec --no-startup-id syncthing -no-browser
