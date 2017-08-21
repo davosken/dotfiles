@@ -1,1 +1,3 @@
-exec i3
+#!/bin/sh
+xrdb -load /home/davos/.Xdefaults
+exec /usr/bin/i3
