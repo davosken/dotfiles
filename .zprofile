@@ -1,3 +1,3 @@
 # .zprofile
 
-exec startx
+# exec startx

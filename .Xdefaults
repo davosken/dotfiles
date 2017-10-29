@@ -33,7 +33,6 @@ URxvt.intensityStyles:	false
 URxvt.background:       [70]#000000
 URxvt.depth:		32
 URxvt.font: 		xft:monospace:size=11
-#:antialias=false
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
 URxvt.perl-ext-common:	default,matcher,resize-font

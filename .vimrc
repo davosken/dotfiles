@@ -1,1 +1,1 @@
-so ~/.config/scripts/vimrc
+so ~/.scripts/vimrc
