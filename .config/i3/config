@@ -27,14 +27,14 @@ exec --no-startup-id mpd
 exec --no-startup-id unclutter
 exec --no-startup-id syncthing -no-browser
 #exec --no-startup-id feh --bg-scale ~/.config/wall.png
-exec --no-startup-id wal -c -i ~/.config/wall.png
+exec --no-startup-id wal -b "#000000" -a "70" -c -i ~/.config/wall.png
 exec --no-startup-id compton
 
 exec $browser
 exec $voip
 exec $email
 exec $game
-exec --no-startup-id i3-msg 'workspace 6; exec $music; workspace 1'
+exec --no-startup-id i3-msg 'workspace 5; exec $music; workspace 1'
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###

@@ -9,6 +9,7 @@ compinit
 autoload -Uz promptinit
 promptinit
 prompt suse
+(wal -r &)
 
 # Aliases:
 alias ls='ls --color=auto'
