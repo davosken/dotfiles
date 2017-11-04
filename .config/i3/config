@@ -40,7 +40,7 @@ exec --no-startup-id i3-msg 'workspace 6; exec $music; workspace 1'
 ###---AUDIO AND MUSIC DEFINITIONS---###
 
 ##--FOR MPC--##
-set $music urxvt -e ncmpcpp
+#set $music urxvt -e ncmpcpp
 set $pause --no-startup-id mpc toggle
 set $trupause --no-startup-id mpc pause
 set $next --no-startup-id mpc next
@@ -92,6 +92,10 @@ bindsym $mod+Shift+BackSpace	exec sudo reboot
 
 bindsym $mod+grave		exec $flash
 #bindsym $mod+asciitilde
+
+bindsym Print			exec --no-startup-id scrot -e 'mv $f ~/screenshots/'
+bindsym Shift+Print		exec --no-startup-id scrot -u -e 'mv $f ~/screenshots/'
+
 
 ###---LETTER KEY BINDINGS---###
 bindsym $mod+q			kill
@@ -171,9 +175,6 @@ bindsym $mod+n			exec $next
 
 bindsym $mod+m 			exec $music
 bindsym $mod+Shift+m 		exec $mute
-
-bindsym Print			exec --no-startup-id scrot
-bindsym Shift+Print		exec --no-startup-id scrot -u
 
 
 ###---WORKSPACE BINDINGS---###
