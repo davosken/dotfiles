@@ -1,13 +1,18 @@
 # vim: filetype=i3
 
 ###---BASIC DEFINITIONS---###
-set $mod Mod4
-set $term urxvt
-set $browser firefox
+set $mod	Mod4
+set $term	urxvt
+set $browser	firefox
+set $email	thunderbird
+set $voip	mumble
+set $music	urxvt -e ncmpcpp
+set $game	steam
 
 
 ###---SETTINGS---###
-font pango:Dejavu Sans Mono 12
+#font pango:Dejavu Sans Mono 12
+font pango:Hack 10
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
 gaps inner 20
@@ -25,11 +30,11 @@ exec --no-startup-id syncthing -no-browser
 exec --no-startup-id wal -c -i ~/.config/wall.png
 exec --no-startup-id compton
 
-exec $term
 exec $browser
-exec steam
-exec mumble
-exec thunderbird
+exec $voip
+exec $email
+exec $game
+exec --no-startup-id i3-msg 'workspace 6; exec $music; workspace 1'
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###
@@ -227,15 +232,15 @@ bindsym $mod+Shift+c	reload
 
 ###---WORKSPACE ASSIGMENTS---###
 # terminals
-assign [class="urxvt"]		$ws1
+#assign [class="^URxvt$"]		$ws1
 
 # browsers
-assign [class="Firefox"]	$ws2
+assign [class="Firefox"]		$ws2
 
 # chat
-assign [class="Steam"]		$ws3
-assign [class="Mumble"]		$ws3
-assign [class="Teamspeak"]	$ws3
+assign [class="^Steam$"]		$ws7
+assign [class="^Mumble$"]		$ws6
+assign [class="^Teamspeak$"]		$ws6
 
 # mail
-assign [class="Thunderbird"]	$ws8
+assign [class="^Thunderbird$"]		$ws3
