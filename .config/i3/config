@@ -7,7 +7,9 @@ set $browser	firefox
 set $email	thunderbird
 set $voip	mumble
 set $music	urxvt -e ncmpcpp
+set $visual	urxvt -bg "[00]000000" -e cava
 set $game	steam
+set $workspace	~/.config/i3/ws
 
 
 ###---SETTINGS---###
@@ -33,8 +35,8 @@ exec --no-startup-id compton
 exec $browser
 exec $voip
 exec $email
-exec $game
-exec --no-startup-id i3-msg 'workspace 5; exec $music; workspace 1'
+exec --no-startup-id i3-msg 'workspace 7; append_layout $workspace/wsl-7.json; exec $game; workspace 1'
+exec --no-startup-id i3-msg 'workspace 5; exec $visual; exec $music; workspace 1'
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###
@@ -242,8 +244,12 @@ assign [class="^Mumble$"]		$ws6
 assign [class="^Teamspeak$"]		$ws6
 assign [class="^Steam$"]		$ws7
 
+for_window [class="urxvt" title="ncmpcpp"] floating enable
+
 workspace $ws4 gaps inner 0
 workspace $ws4 gaps outer 0
+workspace $ws5 gaps inner 0
+workspace $ws5 gaps outer 0
 workspace $ws8 gaps inner 0
 workspace $ws8 gaps outer 0
 workspace $ws9 gaps inner 0
