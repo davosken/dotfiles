@@ -85,11 +85,11 @@ bindsym $mod+Shift+space	floating toggle
 bindsym $mod+Escape		workspace prev
 bindsym $mod+Shift+Escape	exec i3-msg exit
 
-bindsym $mod+BackSpace		exec $flash
+#bindsym $mod+BackSpace		exec $flash
 bindsym $mod+Shift+BackSpace	exec sudo reboot
 
-bindsym $mod+grave		exec $flash
-#bindsym $mod+asciitilde
+#bindsym $mod+asciitilde	exec $flash
+bindsym $mod+grave		exec ~/.config/scripts/synergy
 
 bindsym Print			exec --no-startup-id scrot -e 'mv $f ~/screenshots/'
 bindsym Shift+Print		exec --no-startup-id scrot -u -e 'mv $f ~/screenshots/'
