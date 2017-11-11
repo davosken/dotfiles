@@ -6,7 +6,6 @@ set $term	urxvt
 set $browser	firefox
 set $email	thunderbird
 set $voip	mumble
-set $visual	urxvt -bg "[00]000000" -e cava
 set $game	steam
 set $workspace	~/.config/i3/ws
 
@@ -27,8 +26,8 @@ exec --no-startup-id redshift
 exec --no-startup-id mpd
 exec --no-startup-id unclutter
 exec --no-startup-id syncthing -no-browser
-#exec --no-startup-id feh --bg-scale ~/.config/wall.png
-exec --no-startup-id wal -b "#000000" -a "70" -c -i ~/.config/wall.png
+exec --no-startup-id feh --bg-scale ~/.config/wall.png
+#exec --no-startup-id wal -b "#000000" -a "70" -c -i ~/.config/wall.png
 exec --no-startup-id compton
 
 exec $browser
@@ -72,7 +71,7 @@ exec --no-startup-id $term -name dropdown -e tmux
 for_window [instance="musicplayer"] floating enable
 for_window [instance="musicplayer"] resize set 2560 1412
 for_window [instance="musicplayer"] move position 0 28
-exec --no-startup-id i3-msg 'workspace 5; exec $visual; exec $term -name musicplayer -e ncmpcpp; workspace 1'
+exec --no-startup-id i3-msg 'workspace 5; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace 1'
 
 
 ###---BASIC BINDINGS---###
@@ -126,7 +125,7 @@ bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
 bindsym $mod+p			exec $pause
 #bindsym $mod+Shift+p		
 
-bindsym $mod+a			[instance="arithmetic"] scratchpad show; move position center
+#bindsym $mod+a			[instance="arithmetic"] scratchpad show; move position center
 bindsym $mod+Shift+a		exec $term -e alsamixer
 
 bindsym $mod+s			gaps inner current plus 5

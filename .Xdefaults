@@ -5,29 +5,29 @@
 !!*background: rgba(0, 0, 0, 1)
 
 !! black
-*color0: #1b1918
-*color8: #766e6b
+*color0: #555555
+*color8: #a2a2a2
 !! red
-*color1: #f22c40
-*color9: #f22c40
+*color1: #9c3528
+*color9: #d64937
 !! green
-*color2: #5ab738
-*color10: #5ab738
+*color2: #61bc3b
+*color10: #86df5d
 !! yellow
-*color3: #d5911a
-*color11: #d5911a
+*color3: #f3b43a
+*color11: #fdd75a
 !! blue
-*color4: #407ee7
-*color12: #407ee7
+*color4: #0d68a8
+*color12: #0f75bd
 !! magenta
-*color5: #6666ea
-*color13: #6666ea
+*color5: #744560
+*color13: #9e5e83
 !! cyan
-*color6: #00ad9c
-*color14: #00ad9c
+*color6: #288e9c
+*color14: #37c3d6
 !! white
-*color7: #a8a19f
-*color15: #f1efee
+*color7: #a2a2a2
+*color15: #f9f9f9
 
 URxvt.intensityStyles:	false
 URxvt.background:       [70]#000000
