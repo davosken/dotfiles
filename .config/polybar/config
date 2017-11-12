@@ -43,9 +43,9 @@ font-1 = Hack:fontformat=truetype:size=8:antialias=false;0
 font-2 = Hack:pixelsize=11;1
 font-3 = fontawesome:pixelsize=11
 
-modules-left = i3 mpd
+modules-left = i3 mpd xwindow
 ;modules-center = mpd
-modules-right = filesystem home opt wlan eth temperature volume date powermenu
+modules-right = filesystem home opt wlan eth temperature volume date powermenu 
 
 ;tray-position = right
 ;tray-padding = 0
