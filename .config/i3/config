@@ -2,12 +2,14 @@
 
 ###---BASIC DEFINITIONS---###
 set $mod	Mod4
-set $term	urxvt
-set $browser	firefox
-set $email	thunderbird
-set $voip	mumble
-set $game	steam
-set $workspace	~/.config/i3/ws
+set $term	/usr/bin/urxvt
+set $browser	/usr/bin/firefox
+set $email	/usr/bin/thunderbird
+set $voip	/usr/bin/mumble
+set $steam	/usr/bin/steam
+set $ws		~/.config/i3/ws
+set $scripts	~/.config/scripts
+set $wall	~/.config/wall.png
 
 
 ###---SETTINGS---###
@@ -21,19 +23,22 @@ gaps outer 0
 
 ###---STARTUP---###
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-#exec --no-startup-id nm-applet
+
+exec --no-startup-id nm-applet
 exec --no-startup-id redshift
 exec --no-startup-id mpd
 exec --no-startup-id unclutter
 exec --no-startup-id syncthing -no-browser
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
-#exec --no-startup-id wal -b "#000000" -a "70" -c -i ~/.config/wall.png
 exec --no-startup-id compton
+exec --no-startup-id feh --bg-scale $wall
+#exec --no-startup-id wal -b "#000000" -a "70" -c -i $wall
 
 exec $browser
 exec $voip
 exec $email
-exec --no-startup-id i3-msg 'workspace 7; append_layout $workspace/wsl-7.json; exec $game; workspace 1'
+exec --no-startup-id i3-msg 'workspace $ws7; append_layout $ws/wsl-7.json; exec $steam; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws5; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace $ws1'
+exec --no-startup-id $term -name dropdown -e tmux
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###
@@ -57,21 +62,6 @@ set $dec --no-startup-id amixer sset Master 2%-
 set $bigdec --no-startup-id amixer sset Master 5%-
 set $mute --no-startup-id amixer sset Master toggle
 set $truemute --no-startup-id amixer sset Master mute
-
-
-###---SCRATCHPAD WINDOWS---###
-
-##--SCRATCHPAD1:DROPDOWN--##
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400
-for_window [instance="dropdown"] move position center
-for_window [instance="dropdown"] move scratchpad
-exec --no-startup-id $term -name dropdown -e tmux
-
-for_window [instance="musicplayer"] floating enable
-for_window [instance="musicplayer"] resize set 2560 1412
-for_window [instance="musicplayer"] move position 0 28
-exec --no-startup-id i3-msg 'workspace 5; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace 1'
 
 
 ###---BASIC BINDINGS---###
@@ -231,6 +221,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 bindsym $mod+Shift+c	reload
 
+
 ###---WORKSPACE ASSIGMENTS---###
 #assign [class="^URxvt$"]		$ws1
 assign [class="Firefox"]		$ws2
@@ -247,3 +238,14 @@ workspace $ws8 gaps inner 0
 workspace $ws8 gaps outer 0
 workspace $ws9 gaps inner 0
 workspace $ws9 gaps outer 0
+
+
+###---WINDOW SETTINGS---###
+for_window [instance="musicplayer"] floating enable
+for_window [instance="musicplayer"] resize set 2560 1412
+for_window [instance="musicplayer"] move position 0 28
+
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move position center
+for_window [instance="dropdown"] move scratchpad
