@@ -1,0 +1,93 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1354,
+       "width": 1756,
+       "x": 775,
+       "y": 57
+    },
+    "name": "Friends",
+    "percent": 0.133333333333333,
+    "swallows": [
+       {
+       "class": "^Steam$",
+       "instance": "^Steam$",
+       "title": "^Friends$",
+       "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1354,
+       "width": 1,
+       "x": 29,
+       "y": 57
+    },
+    "name": "Steam",
+    "percent": 0.533333333333333,
+    "swallows": [
+       {
+       "class": "^Steam$",
+       "instance": "^Steam$",
+       "title": "^Steam$",
+       "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1354,
+       "width": 2502,
+       "x": 29,
+       "y": 57
+    },
+    "name": "Steam",
+    "percent": 0.533333333333333,
+    "swallows": [
+       {
+       "class": "^Steam$",
+       "instance": "^Steam$",
+       "title": "^Steam$",
+       "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 24,
+       "width": 64,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Ithalos - Chat",
+    "percent": 0.333333333333333,
+    "swallows": [
+       {
+       "class": "^Steam$",
+       "instance": "^Steam$",
+       // "title": "^Ithalos\\ \\-\\ Chat$",
+       "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+
