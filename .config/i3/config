@@ -17,7 +17,7 @@ set $wall	~/.config/wall.png
 font pango:Hack 10
 hide_edge_borders both
 for_window [class="^.*"] border pixel 0
-gaps inner 20
+gaps inner 0
 gaps outer 0
 
 
@@ -36,9 +36,10 @@ exec --no-startup-id feh --bg-fill --no-fehbg $wall
 exec $browser
 exec $voip
 exec $email
-exec --no-startup-id i3-msg 'workspace $ws7; append_layout $ws/wsl-7.json; exec $steam; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws5; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws4; append_layout $ws/wsl-4.json; workspace $ws1'
+exec --no-startup-id i3-msg 'workspace $ws3; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace $ws1'
 exec --no-startup-id $term -name dropdown -e tmux
+exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name maths -e R -q
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###
@@ -115,7 +116,7 @@ bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
 bindsym $mod+p			exec $pause
 #bindsym $mod+Shift+p		
 
-#bindsym $mod+a			[instance="arithmetic"] scratchpad show; move position center
+bindsym $mod+a			[instance="maths"] scratchpad show; move position center
 bindsym $mod+Shift+a		exec $term -e alsamixer
 
 bindsym $mod+s			gaps inner current plus 5
@@ -128,7 +129,7 @@ bindsym $mod+f			fullscreen toggle
 #bindsym $mod+Shift+f
 
 bindsym $mod+g			workspace prev
-bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
+bindsym $mod+Shift+g		exec --no-startup-id gimp
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
@@ -155,7 +156,7 @@ bindsym $mod+Shift+x		exec sudo shutdown -h now
 #bindsym $mod+Shift+v
 
 bindsym $mod+b			exec $prev
-bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
+bindsym $mod+Shift+b		exec --no-startup-id blender
 
 bindsym $mod+n			exec $next
 #bindsym $mod+Shift+n		exec $term -e newsbeuter
@@ -224,28 +225,29 @@ bindsym $mod+Shift+c	reload
 
 ###---WORKSPACE ASSIGMENTS---###
 #assign [class="^URxvt$"]		$ws1
-assign [class="Firefox"]		$ws2
-assign [class="^Thunderbird$"]		$ws3
-assign [class="^Mumble$"]		$ws6
-assign [class="^Teamspeak$"]		$ws6
-assign [class="^Steam$"]		$ws7
+assign [class="Firefox"]		$ws1
+assign [class="^Thunderbird$"]		$ws2
+assign [class="^Mumble$"]		$ws3
+assign [class="^Teamspeak$"]		$ws3
+assign [class="^Steam$"]		$ws4
+assign [class="^Gimp$"]			$ws7
+assign [class="^Blender$"]		$ws8
 
-workspace $ws4 gaps inner 0
-workspace $ws4 gaps outer 0
-workspace $ws5 gaps inner 0
-workspace $ws5 gaps outer 0
-workspace $ws8 gaps inner 0
-workspace $ws8 gaps outer 0
-workspace $ws9 gaps inner 0
-workspace $ws9 gaps outer 0
+#workspace $ws4 gaps inner 0
+#workspace $ws4 gaps outer 0
 
 
 ###---WINDOW SETTINGS---###
 for_window [instance="musicplayer"] floating enable
-for_window [instance="musicplayer"] resize set 2560 1412
+for_window [instance="musicplayer"] resize set 1280 1412
 for_window [instance="musicplayer"] move position 0 28
 
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move position center
 for_window [instance="dropdown"] move scratchpad
+
+for_window [instance="maths"] floating enable
+for_window [instance="maths"] resize set 800 300
+for_window [instance="maths"] move position center
+for_window [instance="maths"] move scratchpad

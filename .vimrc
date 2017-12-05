@@ -1,3 +1,6 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 set number
-"set relativenumber
-set colorcolumn=120
+set relativenumber
