@@ -45,7 +45,7 @@ font-3 = fontawesome:pixelsize=11
 
 modules-left = i3 mpd
 ;modules-center = mpd
-modules-right = filesystem home opt wlan eth temperature volume date powermenu 
+modules-right = filesystem home opt wlan eth cputemp gputemp volume date powermenu 
 
 tray-position = right
 tray-padding = 0
@@ -372,10 +372,11 @@ animation-charging-2 = 
 animation-charging-foreground = ${colours.foreground-alt}
 animation-charging-framerate = 750
 
-[module/temperature]
+[module/gputemp]
 type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
+interval = 0.5
+warn-temperature = 70
+hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/0000:09:00.0/0000:0a:00.0/hwmon/hwmon1/temp1_input
 
 format = <ramp> <label>
 ;format-underline = #f22c40
@@ -383,8 +384,26 @@ format = <ramp> <label>
 format-warn = <ramp> <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-label = %temperature%
-label-warn = %temperature%
+label = GPU: %temperature%
+label-warn = GPU: %temperature%
+label-warn-foreground = ${colours.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colours.foreground-alt}
+
+[module/cputemp]
+type = internal/temperature
+interval = 0.5
+warn-temperature = 60
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+
+label = CPU: %temperature%
+label-warn = CPU: %temperature%
 label-warn-foreground = ${colours.secondary}
 
 ramp-0 = 
