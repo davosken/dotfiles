@@ -1,4 +1,5 @@
-# .zprofile
+export XKB_DEFAULT_LAYOUT=gb
 
-setxkbmap gb
-# exec startx
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+	exec startx
+fi

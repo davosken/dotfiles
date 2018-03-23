@@ -1,4 +1,9 @@
-#!/bin/sh
 xrdb -load /home/davos/.Xdefaults
-#ivshmem-server -p /tmp/ivshmem.pid -S /tmp/ivshmem_socket -l 29M -n 8
+exec urxvt &
+exec compton &
+exec syncthing -no-browser &
+exec unclutter &
+exec redshift &
+exec xwinwrap -g 2560x1440 -ov -ni -s -nf -- gifview -w WID ~/.config/wall.png -a &
+exec sxhkd &
 exec /usr/bin/i3

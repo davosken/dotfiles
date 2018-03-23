@@ -1,171 +1,136 @@
-
 ###---BASIC DEFINITIONS---###
-set $mod	Mod4
-set $term	/usr/bin/urxvt
-set $browser	/usr/bin/firefox
-set $email	/usr/bin/thunderbird
-set $voip	/usr/bin/mumble
-set $steam	/usr/bin/steam
-set $ws		~/.config/i3/ws
-set $scripts	~/.config/scripts
-set $wall	~/.config/wall.png
+set $mod        Mod4
+set $term       /usr/bin/urxvt
+set $browser    /usr/bin/firefox
+set $email      /usr/bin/thunderbird
+set $voip       /usr/bin/mumble
+set $steam      /usr/bin/steam
+set $wslayout   ~/.config/i3/wslayout
+set $scripts    ~/.scripts
+set $wall       ~/.config/wall.png
 
 
 ###---SETTINGS---###
-#font pango:Dejavu Sans Mono 12
 font pango:Hack 10
-hide_edge_borders both
-for_window [class="^.*"] border pixel 0
+hide_edge_borders none
+for_window [class="^.*"] border pixel 2
 gaps inner 0
 gaps outer 0
 
 
 ###---STARTUP---###
+#exec --no-startup-id nm-applet
+#exec --no-startup-id redshift
+#exec --no-startup-id mpd
+#exec --no-startup-id unclutter
+#exec --no-startup-id syncthing -no-browser
+#exec --no-startup-id compton
+#exec --no-startup-id feh --bg-fill --no-fehbg $wall
+#exec --no-startup-id betterlockscreen -u ~/.config/wall.png
+#exec --no-startup-id $scripts/synergy
+#exec --no-startup-id wal -b "#000000" -a "70" -c -i $wall
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-exec --no-startup-id nm-applet
-exec --no-startup-id redshift
-exec --no-startup-id mpd
-exec --no-startup-id unclutter
-exec --no-startup-id syncthing -no-browser
-exec --no-startup-id compton
-exec --no-startup-id feh --bg-fill --no-fehbg $wall
-#exec --no-startup-id betterlockscreen -u ~/.config/wall.png
-exec --no-startup-id $scripts/synergy
-#exec --no-startup-id wal -b "#000000" -a "70" -c -i $wall
-
-exec $browser
+#exec $browser
 #exec $voip
-exec $email
-exec --no-startup-id i3-msg 'workspace $ws3; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws4; append_layout $ws/wsl-4.json; workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws5; exec $term; workspace $ws1'
-exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name maths -e R -q
-exec --no-startup-id $term -name dropdown -e tmux
+#exec $email
+#exec --no-startup-id i3-msg 'workspace $ws3; exec $term -e cava; exec ~/.config/scripts/launch_ncmpcpp; workspace $ws1'
+#exec --no-startup-id i3-msg 'workspace $ws4; append_layout $ws/wsl-4.json; workspace $ws1'
+#exec --no-startup-id i3-msg 'workspace $ws5; exec $term; workspace $ws1'
+#exec --no-startup-id $term -fn "xft:mono:pixelsize=24" -name maths -e R -q
+#exec --no-startup-id $term -name dropdown -e tmux
 
 
 ###---AUDIO AND MUSIC DEFINITIONS---###
 
 ##--FOR MPC--##
-set $music urxvt -e ncmpcpp
-set $pause --no-startup-id mpc toggle
-set $trupause --no-startup-id mpc pause
-set $next --no-startup-id mpc next
-set $prev --no-startup-id mpc prev
-set $lilfor --no-startup-id mpc seek +10
-set $bigfor --no-startup-id mpc seek +100
-set $lilbak --no-startup-id mpc seek -10
-set $bigbak --no-startup-id mpc seek -100
-set $beg --no-startup-id mpc seek 0%
+#set $music urxvt -e ncmpcpp
+#set $pause --no-startup-id mpc toggle
+#set $trupause --no-startup-id mpc pause
+#set $next --no-startup-id mpc next
+#set $prev --no-startup-id mpc prev
+#set $lilfor --no-startup-id mpc seek +10
+#set $bigfor --no-startup-id mpc seek +100
+#set $lilbak --no-startup-id mpc seek -10
+#set $bigbak --no-startup-id mpc seek -100
+#set $beg --no-startup-id mpc seek 0%
 
 ##--FOR ALSA--##
-set $inc --no-startup-id amixer sset Master 2%+
-set $biginc --no-startup-id amixer sset Master 5%+
-set $dec --no-startup-id amixer sset Master 2%-
-set $bigdec --no-startup-id amixer sset Master 5%-
-set $mute --no-startup-id amixer sset Master toggle
-set $truemute --no-startup-id amixer sset Master mute
+#set $inc --no-startup-id amixer sset Master 2%+
+#set $biginc --no-startup-id amixer sset Master 5%+
+#set $dec --no-startup-id amixer sset Master 2%-
+#set $bigdec --no-startup-id amixer sset Master 5%-
+#set $mute --no-startup-id amixer sset Master toggle
+#set $truemute --no-startup-id amixer sset Master mute
 
 
 ###---BASIC BINDINGS---###
-bindsym $mod+Return		exec $term
-bindsym $mod+Shift+Return	exec $term -e tmux
-
+#bindsym $mod+Return		exec $term
+#bindsym $mod+Shift+Return	exec $term -e tmux
 bindsym $mod+space		focus mode_toggle
 bindsym $mod+Shift+space	floating toggle
-
-bindsym $mod+Escape		workspace prev
-bindsym $mod+Shift+Escape	exec i3-msg exit
-
+#bindsym $mod+Escape		workspace prev
+#bindsym $mod+Shift+Escape	exec i3-msg exit
 #bindsym $mod+BackSpace		exec $flash
-bindsym $mod+Shift+BackSpace	exec sudo reboot
-
+#bindsym $mod+Shift+BackSpace	exec sudo reboot
 #bindsym $mod+asciitilde	exec $flash
-bindsym $mod+grave		exec ~/.config/scripts/synergy
-
-bindsym Print			exec --no-startup-id scrot -e 'mv $f ~/screenshots/'
-bindsym Shift+Print		exec --no-startup-id scrot -u -e 'mv $f ~/screenshots/'
+#bindsym $mod+grave		exec ~/.config/scripts/synergy
 
 
 ###---LETTER KEY BINDINGS---###
 bindsym $mod+q			kill
 #bindsym $mod+shift+q		kill
-
 #bindsym $mod+w
-bindsym $mod+Shift+w		exec --no-startup-id $browser
-
+#bindsym $mod+Shift+w		exec --no-startup-id $browser
 #bindsym $mod+e			exec $term -e mutt
-#bindsym $mod+Shift+e
-
-bindsym $mod+r			exec $term -e ranger
+bindsym $mod+Shift+e            i3-msg exit
+#bindsym $mod+r			exec $term -e ranger
 bindsym $mod+Shift+r		restart
-
 bindsym $mod+t			split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
-
+#bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 #bindsym $mod+y			exec $term -e calcurse
-bindsym $mod+Shift+y		resize shrink width 10 px or 10 ppt
-
-bindsym $mod+u			[instance="dropdown"] scratchpad show; move position center
-bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
-
-bindsym $mod+i			exec $term -e htop
-bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
-
+#bindsym $mod+Shift+y		resize shrink width 10 px or 10 ppt
+#bindsym $mod+u			[instance="dropdown"] scratchpad show; move position center
+#bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
+#bindsym $mod+i			exec $term -e htop
+#bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
 #bindsym $mod+o			exec --no-startup-id $beg
-bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
-
-bindsym $mod+p			exec $pause
+#bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
+#bindsym $mod+p			exec $pause
 #bindsym $mod+Shift+p		
-
-bindsym $mod+a			[instance="maths"] scratchpad show; move position center
-bindsym $mod+Shift+a		exec $term -e alsamixer
-
+#bindsym $mod+a			[instance="maths"] scratchpad show; move position center
+#bindsym $mod+Shift+a		exec $term -e alsamixer
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
-
-bindsym $mod+d			exec rofi -show run
+#bindsym $mod+d			exec rofi -show run
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
-
 bindsym $mod+f			fullscreen toggle
 #bindsym $mod+Shift+f
-
 bindsym $mod+g			workspace prev
-bindsym $mod+Shift+g		exec --no-startup-id gimp
-
+#bindsym $mod+Shift+g		exec --no-startup-id gimp
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h		move left 30
-
 bindsym $mod+j			focus down
 bindsym $mod+Shift+j		move down 30
-
 bindsym $mod+k			focus up
 bindsym $mod+Shift+k		move up 30
-
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l		move right 30
-
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
-
 #bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+x			exec betterlockscreen -l dimblur
-bindsym $mod+Shift+x		exec sudo shutdown -h now
-
+#bindsym $mod+x			exec betterlockscreen -l dimblur
+#bindsym $mod+Shift+x		exec sudo shutdown -h now
 #bindsym $mod+c			exec $term -e weechat
 #bindsym $mod+Shift+c
-
 #bindsym $mod+v			exec urxvt -e ncmpcpp -s visualizer
 #bindsym $mod+Shift+v
-
-bindsym $mod+b			exec $prev
-bindsym $mod+Shift+b		exec --no-startup-id blender
-
-bindsym $mod+n			exec $next
+#bindsym $mod+b			exec $prev
+#bindsym $mod+Shift+b		exec --no-startup-id blender
+#bindsym $mod+n			exec $next
 #bindsym $mod+Shift+n		exec $term -e newsbeuter
-
-bindsym $mod+m 			exec $music
-bindsym $mod+Shift+m 		exec $mute
+#bindsym $mod+m 			exec $music
+#bindsym $mod+Shift+m 		exec $mute
 
 
 ###---WORKSPACE BINDINGS---###
@@ -179,9 +144,7 @@ bindsym $mod+Next		workspace next
 bindsym $mod+Shift+Next		move container to workspace next
 bindsym $mod+Tab		workspace back_and_forth
 bindsym $mod+XF86Back		workspace prev
-#bindsym $mod+Shift+XF86Back	
 bindsym $mod+XF86Forward	workspace next
-#bindsym $mod+Shift+XF86Forward	
 bindsym $mod+semicolon		workspace next
 bindsym $mod+apostrophe		split horizontal ;; exec $term
 bindsym $mod+slash		split vertical ;; exec $term
@@ -241,16 +204,16 @@ assign [class="^Blender$"]		$ws7
 
 
 ###---WINDOW SETTINGS---###
-for_window [instance="musicplayer"] floating enable
-for_window [instance="musicplayer"] resize set 1280 1412
-for_window [instance="musicplayer"] move position 0 28
+#for_window [instance="musicplayer"] floating enable
+#for_window [instance="musicplayer"] resize set 1280 1412
+#for_window [instance="musicplayer"] move position 0 28
 
-for_window [instance="dropdown"] floating enable
-for_window [instance="dropdown"] resize set 625 400
-for_window [instance="dropdown"] move position center
-for_window [instance="dropdown"] move scratchpad
+#for_window [instance="dropdown"] floating enable
+#for_window [instance="dropdown"] resize set 625 400
+#for_window [instance="dropdown"] move position center
+#for_window [instance="dropdown"] move scratchpad
 
-for_window [instance="maths"] floating enable
-for_window [instance="maths"] resize set 800 300
-for_window [instance="maths"] move position center
-for_window [instance="maths"] move scratchpad
+#for_window [instance="maths"] floating enable
+#for_window [instance="maths"] resize set 800 300
+#for_window [instance="maths"] move position center
+#for_window [instance="maths"] move scratchpad

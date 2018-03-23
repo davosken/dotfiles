@@ -1,68 +1,18 @@
 [colours]
-;background = ${xrdb:color0:#222}
-;background = #b0000000
 background = #ff000000
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
-;primary = #ffb52a
 primary = #1126cb
 secondary = #e60053
 alert = #bd2c40
-col = #00f
 
 [bar/top]
-;monitor = ${env:MONITOR:HDMI-1}
-;monitor = ${env:MONITOR}
 monitor = ${env:MONITOR:Displayport-0}
-width = 100%
-height = 28
-;offset-x = 1%
-;offset-y = 1%
-;radius = 6.0
-fixed-center = false
-
-background = ${colours.background}
-foreground = ${colours.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = Hack:pixelsize=11;1
-font-1 = Hack:fontformat=truetype:size=8:antialias=false;0
-font-2 = Hack:pixelsize=11;1
-font-3 = fontawesome:pixelsize=11
-
-modules-left = i3 mpd
-;modules-center = mpd
-modules-right = filesystem home opt wlan eth cputemp gputemp volume date powermenu 
-
-tray-position = right
-tray-padding = 0
-;tray-transparent = true
-;tray-background = #ffffffff
-;tray-detached = true
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+modules-left = i3
+modules-center = mpd
+modules-right = uptime filesystem home opt wlan eth cputemp gputemp volume date
+include-file = ~/.config/polybar/top-bar
 
 [module/xwindow]
 type = internal/xwindow
@@ -83,6 +33,14 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colours.secondary}
 label-indicator-underline = ${colours.secondary}
+
+[module/uptime]
+type = custom/script
+exec = uptime|awk '{print $2 " " $3 " " $4 " " $5 " " $6}'|cut -d ',' -f -2
+interval = 5
+format-foreground = ${colours.foreground}
+format-padding = 2
+format-background = ${colours.background}
 
 [module/opt]
 type = internal/fs
@@ -194,11 +152,11 @@ port = 6600
 
 interval = 1
 
-;icon-prev = 
-;icon-stop = 
-;icon-play = 
-;icon-pause = 
-;icon-next = 
+;icon-prev = 
+;icon-stop = 
+;icon-play = 
+;icon-pause = 
+;icon-next = 
 icon-prev = <-
 icon-stop = X
 icon-play-prefix = #f00
@@ -239,7 +197,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colours.foreground-alt}
 ;format-underline = #f90000
 label = CPU %percentage%%
@@ -247,7 +205,7 @@ label = CPU %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colours.foreground-alt}
 ;format-underline = #4bffdc
 label = RAM %percentage_used%%
@@ -277,13 +235,11 @@ ramp-signal-foreground = ${colours.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp6s0
+interface = enp5s0
 interval = 3.0
 
 format-connected-underline = #1126cb
-;format-connected-underline = #5ab738
-;format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix = " "
 format-connected-prefix-foreground = ${colours.foreground-alt}
 label-connected = %local_ip%
 
@@ -295,7 +251,7 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 ;date = " %a, %b %d, %Y"
 date = " %a %d"
@@ -303,11 +259,11 @@ date = " %a %d"
 ;date-alt = " %Y-%m-%d"
 
 ;time = " at %H:%M"
-time = " %H:%M"
+time = " %H:%M:%S"
 ;time-alt = " %H:%M:%S"
 ;time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = 
 format-prefix-foreground = ${colours.foreground-alt}
 ;format-underline = #1126cb
 ;format-underline = #407ee7
@@ -380,7 +336,7 @@ hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/0000:09:00.0/0000
 
 format = <ramp> <label>
 ;format-underline = #f22c40
-;format-underline = #f50a4d
+format-underline = ${colours.primary}
 format-warn = <ramp> <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
@@ -388,9 +344,9 @@ label = GPU: %temperature%
 label-warn = GPU: %temperature%
 label-warn-foreground = ${colours.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colours.foreground-alt}
 
 [module/cputemp]
@@ -406,19 +362,19 @@ label = CPU: %temperature%
 label-warn = CPU: %temperature%
 label-warn-foreground = ${colours.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colours.foreground-alt}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+;ramp-foreground = ${colours.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colours.secondary}
-label-close =  cancel
+label-close =  cancel
 label-close-foreground = ${colours.secondary}
 label-separator = |
 label-separator-foreground = ${colours.foreground-alt}
