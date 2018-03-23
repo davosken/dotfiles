@@ -1,0 +1,41 @@
+#
+# wm independent hotkeys
+#
+
+###---BASIC KEYBINDS---###
+super + Return
+	urxvt
+super + shift + Return
+	urxvt -e tmux
+super + Escape
+	pkill -USR1 -x sxhkd
+super + shift + Escape
+	shutdown -h now
+super + BackSpace
+	urxvt -e tmux
+super + shift + BackSpace
+	sudo reboot
+Print
+	scrot -e 'mv $f ~/Screenshots/'
+
+###---LETTER KEY BINDINGS---###
+super + d
+	rofi -show run
+super + r
+	urxvt -e ranger
+super + i
+	urxvt -e htop
+super + w
+	firefox
+#MPC
+super + m
+	urxvt -e ncmpcpp
+super + p
+	mpc pause
+super + n
+	mpc next
+super + b
+	mpc prev
+#ALSA
+super + M
+	amixer sset PCM toggle
