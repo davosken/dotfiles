@@ -1,5 +1,5 @@
+setxkbmap gb
 xrdb -load /home/davos/.Xdefaults
-exec urxvt &
 exec compton &
 exec syncthing -no-browser &
 exec unclutter &
