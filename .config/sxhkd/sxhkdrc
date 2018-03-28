@@ -9,8 +9,8 @@ super + shift + Return
 	urxvt -e tmux
 super + Escape
 	pkill -USR1 -x sxhkd
-super + shift + Escape
-	shutdown -h now
+#super + shift + Escape
+#	shutdown -h now
 super + BackSpace
 	urxvt -e tmux
 super + shift + BackSpace
@@ -27,6 +27,8 @@ super + i
 	urxvt -e htop
 super + w
 	firefox
+super + shift + x
+	shutdown -h now
 #MPC
 super + m
 	urxvt -e ncmpcpp
