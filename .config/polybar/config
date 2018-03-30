@@ -1,3 +1,9 @@
+; vim:ft=dosini
+[settings]
+throttle-ms = 50
+throttle-limit = 5
+screenchange-reload = true
+
 [colours]
 background = #ff000000
 background-alt = #444
@@ -10,8 +16,9 @@ alert = #bd2c40
 [bar/top]
 monitor = ${env:MONITOR:Displayport-0}
 modules-left = i3
-modules-center = mpd
-modules-right = uptime filesystem home opt wlan eth cputemp gputemp volume date
+;modules-center = mpd
+modules-right = battery clock
+;modules-right = uptime filesystem home opt wlan eth cputemp gputemp battery volume clock
 include-file = ~/.config/polybar/top-bar
 
 [module/xwindow]
@@ -249,27 +256,12 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colours.foreground-alt}
 
-[module/date]
+[module/clock]
 type = internal/date
+date = %%{T3}%Y-%m-%d %H:%M:%S%%{T-}
 interval = 1
 
-;date = " %a, %b %d, %Y"
-date = " %a %d"
-;date-alt = " %a, %b %d, %Y at %I:%M%p"
-;date-alt = " %Y-%m-%d"
-
-;time = " at %H:%M"
-time = " %H:%M:%S"
-;time-alt = " %H:%M:%S"
-;time-alt = %H:%M:%S
-
-format-prefix = 
 format-prefix-foreground = ${colours.foreground-alt}
-;format-underline = #1126cb
-;format-underline = #407ee7
-;format-underline = #0a6cf5
-
-label = %date% %time%
 
 [module/volume]
 type = internal/volume
@@ -301,32 +293,9 @@ bar-volume-empty-foreground = ${colours.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
-adapter = ADP1
 full-at = 98
-
-format-charging = Charging... <label-charging>
-#format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
-
-format-discharging = <label-discharging> 
-#format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colours.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colours.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colours.foreground-alt}
-animation-charging-framerate = 750
+format-charging = %{T3}Battery <label-charging>
+format-discharging = %{T3}Battery <label-discharging>
 
 [module/gputemp]
 type = internal/temperature
@@ -393,13 +362,6 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
 
 [global/wm]
 margin-top = 5
