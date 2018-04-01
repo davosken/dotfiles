@@ -17,7 +17,7 @@ alert = #bd2c40
 monitor = ${env:MONITOR:Displayport-0}
 modules-left = i3
 ;modules-center = mpd
-modules-right = battery clock
+modules-right = cputemp gputemp battery clock
 ;modules-right = uptime filesystem home opt wlan eth cputemp gputemp battery volume clock
 include-file = ~/.config/polybar/top-bar
 
@@ -258,7 +258,8 @@ format-disconnected =
 
 [module/clock]
 type = internal/date
-date = %%{T3}%Y-%m-%d %H:%M:%S%%{T-}
+;date = %%{T3}%Y-%m-%d %H:%M:%S%%{T-}
+date = %Y-%m-%d %H:%M:%S
 interval = 1
 
 format-prefix-foreground = ${colours.foreground-alt}
@@ -305,17 +306,17 @@ hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:08:00.0/0000:09:00.0/0000
 
 format = <ramp> <label>
 ;format-underline = #f22c40
-format-underline = ${colours.primary}
+;format-underline = ${colours.primary}
 format-warn = <ramp> <label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-label = GPU: %temperature%
-label-warn = GPU: %temperature%
+label = %temperature%
+label-warn = %temperature%
 label-warn-foreground = ${colours.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = GPU:
+ramp-1 = GPU:
+ramp-2 = GPU:
 ramp-foreground = ${colours.foreground-alt}
 
 [module/cputemp]
@@ -326,15 +327,17 @@ hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
+;format = <label>
+;format-warn = <label>
 
-label = CPU: %temperature%
-label-warn = CPU: %temperature%
+label = %temperature%
+label-warn = %temperature%
 label-warn-foreground = ${colours.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-;ramp-foreground = ${colours.foreground-alt}
+ramp-0 = CPU:
+ramp-1 = CPU:
+ramp-2 = CPU:
+ramp-foreground = ${colours.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
