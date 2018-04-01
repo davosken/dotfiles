@@ -295,8 +295,8 @@ bar-volume-empty-foreground = ${colours.foreground-alt}
 [module/battery]
 type = internal/battery
 full-at = 98
-format-charging = %{T3}Battery <label-charging>
-format-discharging = %{T3}Battery <label-discharging>
+format-charging = Battery <label-charging>
+format-discharging = Battery <label-discharging>
 
 [module/gputemp]
 type = internal/temperature
