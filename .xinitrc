@@ -1,6 +1,6 @@
 setxkbmap gb
 xrdb -load /home/davos/.Xdefaults
-exec compton &
+#exec compton &
 exec syncthing -no-browser &
 exec unclutter &
 exec redshift &
